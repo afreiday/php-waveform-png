@@ -10,7 +10,7 @@ This code was adapted by [Andrew Freiday](http://andrewfreiday.com).
 ### Requirements
 
 	- PHP 5+
-	- LAME MP3 Encoder (Windows build available [here](http://www.rarewares.org/mp3-lame-bundle.php))
+	- LAME MP3 Encoder (Windows build available from http://www.rarewares.org/mp3-lame-bundle.php)
 	- Web server (Apache, etc -- unless modified to run as a command line script)
 
 ### Usage/Installation
