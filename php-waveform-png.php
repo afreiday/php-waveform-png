@@ -209,6 +209,8 @@
       unlink($filename);
       
     }
+    
+    header("Content-Type: image/png");
   
     // want it resized?
     if ($width) {
@@ -219,12 +221,12 @@
       imagealphablending($rimg, false);
       // copy to resized
       imagecopyresampled($rimg, $img, 0, 0, 0, 0, $width, $height, imagesx($img), imagesy($img));
+      imagepng($rimg);
+      imagedestroy($rimg);
+    } else {
+      imagepng($img);
     }
     
-    header("Content-Type: image/png");
-    
-    imagepng($rimg);
-    imagedestroy($rimg);
     imagedestroy($img);
     
   } else {
