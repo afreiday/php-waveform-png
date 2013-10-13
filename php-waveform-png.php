@@ -85,7 +85,13 @@
     $img = false;
 
     // generate foreground color
-    list($r, $g, $b) = html2rgb($foreground);
+    // moved code to line 93 support transparent waveform rendering - Chandan Dsa
+    // list($r, $g, $b) = html2rgb($foreground);  
+    
+    if ($foreground == "") {
+    } else {
+      list($r, $g, $b) = html2rgb($foreground);
+    }    
     
     // process each wav individually
     for($wav = 1; $wav <= sizeof($wavs_to_process); $wav++) {
@@ -214,12 +220,20 @@
   
     // want it resized?
     if ($width) {
+    	// TODO - transparent waveform png  - check line 88 - Chandan Dsa.
       // resample the image to the proportions defined in the form
       $rimg = imagecreatetruecolor($width, $height);
       // save alpha from original image
       imagesavealpha($rimg, true);
       imagealphablending($rimg, false);
       // copy to resized
+
+//      Is it possible to have foreground color as transparent color and I ll keep background as solid color.
+
+// I just require this so that using some css I can show the progress bar with different color on foreground
+
+
+      
       imagecopyresampled($rimg, $img, 0, 0, 0, 0, $width, $height, imagesx($img), imagesy($img));
       imagepng($rimg);
       imagedestroy($rimg);
@@ -244,7 +258,7 @@
   <p>Image Height:<br />
     <input type="text" name="height" value="<?php print DEFAULT_HEIGHT; ?>" /></p>
     
-  <p>Foreground Color: <small>(HEX/HTML color code)</small><br />
+  <p>Foreground Color: (Leave blank for transparent background) <small>(HEX/HTML color code)</small><br />
     <input type="text" name="foreground" value="<?php print DEFAULT_FOREGROUND; ?>" /></p>
     
   <p>Background Color: (Leave blank for transparent background) <small>(HEX/HTML color code)</small><br />
